@@ -1,0 +1,38 @@
+.title-link:hover{
+    text-decoration: none;
+}
+.article-list{
+    margin-top: 50px;
+}
+.article-show{
+    margin-top: 100px;
+}
+.writing-form{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.button-container{
+    margin-top: 20px;
+}
+.button-container button{
+    margin-right: 10px;
+}
+#article-id{
+    display: none;
+}
+div.admin-signin{
+    text-align: left;
+}
+div.admin-signin a{
+    text-decoration: none;
+    cursor: pointer;
+}
+#signin-modal{
+    color: #000;
+}
+#signin-modal .form-container{
+    width: 360px;
+}
+#signin-modal .checkbox{
+    text-align: left;
+}

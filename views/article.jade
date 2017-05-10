@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .container
+        .blog-header
+            h1.blog-title 思霖的博客
+                p.lead.blog-description 记录我在编程学习过程中的收获和感悟
+                    .row.article-list
+                        .col-md-12.blog-main
+                            for article in articleList
+                                .blog-post
+                                    a.title-link(href="/article/show?id=#{article._id}"): h2.blog-post-title #{article.title}
+                                    p.blog-post-meta
+                                        #[span #{article.created_at.getFullYear()}年#{article.created_at.getMonth()}月#{article.created_at.getDate()}日 #{article.created_at.getHours()}:#{article.created_at.getMinutes()}:#{article.created_at.getSeconds()}] by #[a(href="#") #{article.author}]
+                                    p #{article.abstract}
+                                    hr
+                                    p #{article.body}

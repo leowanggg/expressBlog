@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    .container
+        .row.article-show
+            .col-sm-12.blog-main
+                .blog-post
+                    h2.blog-post-title #{article.title}
+                    p.blog-post-meta
+                        #[span #{article.created_at.getFullYear()}年#{article.created_at.getMonth()}月#{article.created_at.getDate()}日 #{article.created_at.getHours()}:#{article.created_at.getMinutes()}:#{article.created_at.getSeconds()}] by #[a(href="#") #{article.author}]
+                    p #{article.abstract}
+                    hr
+                    p #{article.body}
+                    .button-container
+                        a(href="/article/edit?id=#{article._id}"): button(type="submit", class="btn btn-warning") 编辑
+                        a(href="/article/delete?id=#{article._id}"): button(type="submit", class="btn btn-danger") 删除

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .container.writing-form
+         form(action="/article/create/submit", method="post")
+            .form-group
+                .input-group
+                    span.input-group-addon#basic-addon1 标题
+                    input(type="text", name="title", class="form-control" placeholder="请输入标题", aria-describedby="basic-addon1", required)
+                br
+                .input-group
+                    span.input-group-addon#basic-addon1 摘要
+                    input(type="text", name="abstract", class="form-control" placeholder="请输入文章摘要", aria-describedby="basic-addon1", required)
+            .form-group
+                textarea.form-control(name="body", rows="10", required)
+            .form-group
+                button(type="submit", class="btn btn-primary") 提交

@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(href="/stylesheets/ie10-viewport-bug-workaround.css", rel="stylesheet")
+    link(href="/stylesheets/blog.css", rel="stylesheet")
+    link(rel="icon", href="/favicon.ico")
+  body
+    .blog-masthead
+        .container
+            nav.blog-nav
+                a.blog-nav-item(href="/") 封面
+                a.blog-nav-item(href="/article") 文章
+                a.blog-nav-item(href="#") 关于
+
+    block content
+
+    footer.blog-footer
+        p
+            | Blog template built for
+            a(href="http://getbootstrap.com")  Bootstrap
+            |  by
+            a(href="https://twitter.com/mdo")  @mdo
+            | .
+        p
+            a(href='#') Back to top
+
+    //
+        Bootstrap core JavaScript
+        ==================================================
+        Placed at the end of the document so the pages load faster
+    script(src='/javascripts/jquery.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/ie10-viewport-bug-workaround.js')
