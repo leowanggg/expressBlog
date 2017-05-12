@@ -84,3 +84,12 @@
 .message-container a{
     float: right;
 }
+.modal-content{
+    width: 460px;
+}
+.modal-header{
+    text-align: left;
+}
+.modal-title{
+    display: inline;
+}

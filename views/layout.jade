@@ -32,10 +32,13 @@ html
     .modal.fade#signin-modal
         .modal-dialog(role="document")
             .modal-content
+                .modal-header
+                    h4.modal-title 请登录
+                    button.close(type="button", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
                 .modal-body
                     .container.form-container
                         form.form-signin(action="/adminSignin", method="post")
-                            h2.form-signin-heading 请登录
                             label.sr-only(for="inputEmail") 电子邮箱
                             input#inputEmail.form-control(type="email", name="email", placeholder="邮箱地址", required, autofocus)
                             label.sr-only(for="inputPassword") 密码
