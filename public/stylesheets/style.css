@@ -17,13 +17,17 @@
 .button-container button{
     margin-right: 10px;
 }
-#article-id{
+.article-id{
     display: none;
 }
-div.admin-signin{
+.site-wrapper .masthead .inner{
     text-align: left;
 }
-div.admin-signin a{
+.masthead .admin-signin{
+    text-decoration: none;
+    cursor: pointer;
+}
+.masthead .admin-signout{
     text-decoration: none;
     cursor: pointer;
 }
@@ -35,4 +39,48 @@ div.admin-signin a{
 }
 #signin-modal .checkbox{
     text-align: left;
+}
+.blog-masthead .admin-signin{
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+}
+.blog-masthead .admin-signout{
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+}
+.comment-containner{
+    margin-bottom: 100px;
+}
+.comment-containner a{
+    float: right;
+}
+.avatar{
+    width: 200px;
+    height: 200px;
+}
+.resume{
+    margin-top: 40px;
+}
+.resume a{
+    margin-left: 20px;
+    cursor: pointer;
+}
+.aboutme-container{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.contact-container{
+    margin-top: 50px;
+};
+.blog-post-meta a:hover{
+    text-decoration: none;
+}
+.message-container{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.message-container a{
+    float: right;
 }

@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    .container.aboutme-container
+        .well
+            .row.info-aboutme
+                .col-md-4
+                    img.avatar.img-responsive.img-circle(src="./images/avatar.jpg")
+                .col-md-8.resume
+                    h3 王思霖(@leowanggg)
+                        a(href="https://github.com/leowanggg", target="_blank"): i.fa.fa-github(aria-hidden="true")
+                    hr
+                    p 本科毕业与电子科技大学电子信息工程系，后赴法攻读研究生（方向为机器学习）。喜欢科技产品及任何计算机相关的技术，尤其热爱前端技术，立志成为尖端的前端工程师。
+
+        .contact-container
+            h3 联系我
+            p 在下方留下你的电子邮箱地址和留言，收到消息后我会尽快回复到你的邮箱。
+            br
+            form(action="/message/submit", method="post")
+                .form-group
+                    .input-group
+                        span.input-group-addon#basic-addon1 电子邮箱
+                        input(type="text", name="email", class="form-control" placeholder="请输入你的电子邮箱地址", aria-describedby="basic-addon1", required)
+                .form-group
+                    textarea.form-control(name="msg", rows="5", required)
+                .form-group
+                    button(type="submit", class="btn btn-primary") 发布

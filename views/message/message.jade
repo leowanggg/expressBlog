@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    .container.message-container
+        for msg in messages
+            .well
+                p #{msg.body}
+                hr
+                p
+                    strong #{msg.email}&nbsp;
+                    发送于&nbsp;#[span.glyphicon.glyphicon-time]&nbsp;#{msg.created_at.getFullYear()}年#{msg.created_at.getMonth()}月#{msg.created_at.getDate()}日 #{msg.created_at.getHours()}:#{msg.created_at.getMinutes()}:#{msg.created_at.getSeconds()}
+                    if isAdmin == true
+                        a(href="/message/delete?id=#{msg._id}"): button(type="button", class="btn btn-danger") 删除

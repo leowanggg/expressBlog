@@ -6,31 +6,38 @@ var Article = models.Article;
 
 /* GET archieve listing. */
 router.get('/', function(req, res, next) {
+    var isAdmin = req.session.admin ? true : false;
     Article.find({}, function(err, articles){
         if (err) throw err;
-        res.render('article', {articleList: articles});
+        res.render('article/article', {articleList: articles, isAdmin: isAdmin});
     })
 
 });
 
 // write article
 router.get('/create', function(req, res, next) {
-  res.render('create');
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
+    var isAdmin = req.session.admin ? true : false;
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
+    res.render('article/create', {isAdmin: isAdmin});
+
 });
 
 // create/submit article
 router.post('/create/submit', function(req, res, next) {
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
     var articleData = req.body;
     var articleInstance = new Article({
         title: articleData.title,
         abstract: articleData.abstract,
         body: articleData.body,
-        author: "Silin",
-        comment:[{
-            person: null,
-            comment: null,
-            created_at: null
-        }],
+        author: "王思霖",
         created_at: new Date(),
         updated_at: new Date()
     });
@@ -44,6 +51,7 @@ router.post('/create/submit', function(req, res, next) {
 
 // show article
 router.get('/show', function(req, res, next) {
+    var isAdmin = req.session.admin ? true : false;
     var articleId = "";
     if(req.query.id){
         articleId = req.query.id;
@@ -52,40 +60,82 @@ router.get('/show', function(req, res, next) {
     }
     Article.findOne({_id: articleId}, function(err, article){
         if (err) throw err;
-        res.render("show", {article: article});
+        res.render("article/show", {article: article, isAdmin: isAdmin});
     });
 });
 
 // edit article
 router.get('/edit', function(req, res, next) {
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
+    var isAdmin = req.session.admin ? true : false;
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
     var articleId = req.query.id;
     Article.findOne({_id: articleId}, function(err, article){
         if (err) throw err;
-        res.render("edit", {article: article});
+        res.render("article/edit", {article: article, isAdmin: isAdmin});
     });
 });
 
 // edit/submit article
 router.post('/edit/submit', function(req, res, next) {
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
     var articleData = req.body;
-    Article.findOneAndUpdate({_id: articleData.id}, {
+    console.log(articleData.articleId);
+    Article.findOneAndUpdate({_id: articleData.articleId}, {
         title: articleData.title,
         abstract: articleData.abstract,
         body: articleData.body,
         updated_at: new Date()
-    }, {new: true}, function(err, article){
+    }, function(err, article){
         if (err) throw err;
-        console.log(article);
-        res.redirect("/article/show?" + "id=" + article._id);
+        res.redirect("/article/show?id=" + article._id);
     });
 });
 
 // delete article
 router.get('/delete', function(req, res, next) {
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
     var articleId = req.query.id;
     Article.findOneAndRemove({_id: articleId}, function(err){
         if (err) throw err;
         res.redirect("/article")
+    });
+});
+
+// submit comment
+router.post('/submitComment', function(req, res, next){
+    var commentData = req.body;
+    Article.findOneAndUpdate({_id: commentData.articleId}, {$push: {comment:
+        {
+            person: commentData.person,
+            comment: commentData.comment,
+            created_at: new Date()
+        }
+    }}, {new: true}, function(err, article){
+        if (err) throw err;
+        res.redirect("/article/show?id=" + commentData.articleId)
+    });
+});
+
+// delete comment
+router.get('/deleteComment', function(req, res, next){
+    if (!req.session.admin){
+        res.send('Need admin!');
+    }
+    var articleId = req.query.articleId;
+    var commentId = req.query.commentId;
+    Article.findOneAndUpdate({_id: articleId}, {$pull: {comment: {_id: commentId}
+    }}, {new: true}, function(err, article){
+        if (err) throw err;
+        res.redirect("/article/show?id=" + articleId)
     });
 });
 

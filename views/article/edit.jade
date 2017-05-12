@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+    .container.writing-form
+         form(action="/article/edit/submit", method="post")
+            .form-group
+                .input-group
+                    span.input-group-addon#basic-addon1 标题
+                    input.article-id(type="text", name="articleId", value="#{article._id}")
+                    input(type="text", name="title", class="form-control", value="#{article.title}", aria-describedby="basic-addon1", required)
+                br
+                .input-group
+                    span.input-group-addon#basic-addon1 摘要
+                    input(type="text", name="abstract", class="form-control", value="#{article.abstract}", aria-describedby="basic-addon1", required)
+            .form-group
+                textarea.form-control(name="body", rows="10", required) #{article.body}
+            .form-group
+                button(type="submit", class="btn btn-primary") 发布

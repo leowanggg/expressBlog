@@ -12,6 +12,8 @@ var session = require('express-session');
 // router
 var index = require('./routes/index');
 var article = require('./routes/article');
+var about = require('./routes/about');
+var message = require('./routes/message');
 
 var app = express();
 
@@ -28,7 +30,7 @@ mongoose.connect(mongoDB);
 var db = mongoose.connnection;
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/fonts', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,12 +41,14 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 120 * 1000
+        maxAge: 7200 * 1000
     }
 }));
-
+// router address
 app.use('/', index);
 app.use('/article', article);
+app.use('/about', about);
+app.use('/message', message);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

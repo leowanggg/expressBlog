@@ -7,16 +7,18 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(href="/stylesheets/ie10-viewport-bug-workaround.css", rel="stylesheet")
-    link(href="/stylesheets/cover.css", rel="stylesheet")
-    link(rel="icon", href="/favicon.ico")
+    link(rel="stylesheet", href="/stylesheets/ie10-viewport-bug-workaround.css")
+    link(rel="stylesheet", href="/stylesheets/cover.css")
   body
     .site-wrapper
         .site-wrapper-inner
             .cover-container
                 .masthead.clearfix
-                    .inner.admin-signin
-                        a(data-toggle="modal", data-target="#signin-modal") 管理员登录
+                    .inner
+                        if isAdmin == true
+                            a.blog-nav-item.admin-signout(href="/adminSignout") 管理员登出
+                        else
+                            a.admin-signin(data-toggle="modal", data-target="#signin-modal") 管理员登录
                 .inner.cover
                     h1.cover-heading 思霖的博客
                     p.lead 这是我的博客，基于nodejs, expressjs 和 bootstrap。
@@ -27,27 +29,20 @@ html
                 .modal.fade#signin-modal
                     .modal-dialog(role="document")
                         .modal-content
-                            //.modal-header
-                            //    h5.modal-title 管理员登陆
-                            //    button.close(type="button", class="close", data-dismiss="modal" aria-label="Close")
-                            //        span(aria-hidden="true") &times;
                             .modal-body
                                 .container.form-container
-                                    form.form-signin
+                                    form.form-signin(action="/adminSignin", method="post")
                                         h2.form-signin-heading 请登录
                                         label.sr-only(for="inputEmail") 电子邮箱
-                                        input#inputEmail.form-control(type="email", placeholder="邮箱地址", required, autofocus)
+                                        input#inputEmail.form-control(type="email", name="email", placeholder="邮箱地址", required, autofocus)
                                         label.sr-only(for="inputPassword") 密码
-                                        input#inputPassword.form-control(type="password", placeholder="密码", required)
+                                        input#inputPassword.form-control(type="password", name="password", placeholder="密码", required)
                                         .checkbox
                                             label
                                                 input(type="checkbox", value="remember-me")
                                                 记住我
                                         button.btn.btn-lg.btn-primary.btn-block(type="submit") 登录
-
-                            //.modal-footer
-                            //    button.btn.btn-primary(type="button") 登录
-                            //    button.btn.btn-secondary(type="button", data-dismiss="modal") 关闭
+                // modal window
 
                 .mastfoot
                     .inner

@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+    .container
+        .row.article-show
+            .col-sm-12.blog-main
+                .blog-post
+                    h2.blog-post-title #{article.title}
+                    p.blog-post-meta
+                        #[span.glyphicon.glyphicon-time]&nbsp;#[span #{article.created_at.getFullYear()}年#{article.created_at.getMonth()}月#{article.created_at.getDate()}日&nbsp;#{article.created_at.getHours()}:#{article.created_at.getMinutes()}:#{article.created_at.getSeconds()}]&nbsp;by&nbsp;#[a(href="/about") #{article.author}]
+                    p #{article.abstract}
+                    hr
+                    p #{article.body}
+                    if isAdmin == true
+                        .button-container
+                            a(href="/article/edit?id=#{article._id}"): button(type="button", class="btn btn-warning") 编辑
+                            a(href="/article/delete?id=#{article._id}"): button(type="button", class="btn btn-danger") 删除
+        .comment-containner
+            .comment-show
+                for comment in article.comment
+                    .well
+                        p #{comment.comment}
+                        hr
+                        p
+                            strong #{comment.person}&nbsp;
+                            评论于&nbsp;#[span.glyphicon.glyphicon-time]&nbsp;#{comment.created_at.getFullYear()}年#{comment.created_at.getMonth()}月#{comment.created_at.getDate()}日&nbsp;#{comment.created_at.getHours()}:#{comment.created_at.getMinutes()}:#{comment.created_at.getSeconds()}
+                            if isAdmin == true
+                                a(href="/article/deleteComment?articleId=#{article._id}&commentId=#{comment._id}"): button(type="button", class="btn btn-danger") 删除
+            .comment-input
+                form(action="/article/submitComment", method="post")
+                   .form-group
+                       .input-group
+                           span.input-group-addon#basic-addon1 名字
+                           input.article-id(type="text", name="articleId", value="#{article._id}")
+                           input(type="text", name="person", class="form-control" placeholder="请输入你的名字", aria-describedby="basic-addon1", required)
+                   .form-group
+                       textarea.form-control(name="comment", rows="3", required)
+                   .form-group
+                       button(type="submit", class="btn btn-primary") 发布
